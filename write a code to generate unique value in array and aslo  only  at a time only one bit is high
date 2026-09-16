@@ -1,0 +1,26 @@
+ write a code to generate unique value in array and aslo  only  at a time only one bit is high?
+
+
+class  packet;
+  rand bit[7:0]a[];
+ 
+  constraint x{  a.size inside {[1:8]}; //   confict why  //  we need size only 8 position beacuse  of range and only one bit is high at a time 
+               foreach(a[i]){
+                 $onehot(a[i]);
+               }
+               unique{a};}
+              
+                 
+        function  void post_randomize();
+          foreach(a[i])
+                  $display("a=%0p", a[i]);
+               endfunction
+               
+               endclass
+               module tab;
+                 packet pac=new();
+                 initial begin
+                   repeat(10)
+                   pac.randomize();
+                 end
+               endmodule 
