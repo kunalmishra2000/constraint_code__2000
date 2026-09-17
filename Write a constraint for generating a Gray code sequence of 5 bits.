@@ -1,0 +1,27 @@
+
+2. ////Write a constraint for generating a Gray code sequence of 5 bits.
+
+class packet;
+  rand bit[0:4] binary;
+  rand  bit[0:4] gray;
+  
+  constraint x{ 
+    gray[0]==binary[0];
+    foreach(binary[i]){
+      if(i>0)
+        gray[i]== binary[i] ^ binary[i-1]; // understanding issue
+    }
+  }
+      function void post_randomize();
+    $display("binary=%b gray=%b", binary, gray);
+    endfunction
+    
+    endclass
+    
+    module tab;
+      packet pac=new();
+      initial  begin
+        repeat(5)
+          assert(pac.randomize());
+      end
+    endmodule 
