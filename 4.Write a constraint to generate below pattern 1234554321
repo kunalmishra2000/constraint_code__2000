@@ -1,0 +1,31 @@
+
+//4.Write a constraint to generate below pattern 1234554321
+
+class packet;
+  rand bit[8:0] a[10];
+  
+  constraint x{  foreach(a[i])
+    if(i<5)
+      a[i] ==i+1;
+               else
+                 a[i] == 10-i;
+    
+              }
+  
+  function void post_randomize();
+    $display("a=%0p", a);
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac[];
+  initial begin
+    pac=new[4];
+    foreach(pac[i])
+      begin
+        pac[i]=new();
+        pac[i].randomize();
+      end
+  end
+    endmodule 
