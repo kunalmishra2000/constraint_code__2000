@@ -1,0 +1,25 @@
+//Q4:write a constraint to generate below pattern 5 -10 15 -20 25 -30
+
+class packet;
+  rand int a[10];
+  
+  constraint x{ foreach(a[i]){
+    if(i%2==0)
+      a[i]== (i*5)+5;
+    else
+      a[i]== -((i*5)+5);
+    
+  }
+              }
+    function void post_randomize();
+               $display("a=%0p",a);
+               endfunction
+               
+               endclass
+               
+               module tab;
+                 packet pac=new();
+                 initial begin
+                   pac.randomize();
+                 end
+               endmodule
