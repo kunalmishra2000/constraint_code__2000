@@ -1,0 +1,25 @@
+////Q8:Write constraint to generate random values 25,27,30,36,40,45 without using "set membership is called (inside operator)". 
+class packet;
+   rand int a;
+  
+  
+  constraint x{  (a>24 &&   a<46);
+    
+               ((a%5==0) || (a%9==0));   (a !=45);
+  
+              }
+    
+   
+  function void post_randomize();
+               $display("a=%0d", a);
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+    repeat(20)
+      assert(pac.randomize());
+  end
+endmodule 
