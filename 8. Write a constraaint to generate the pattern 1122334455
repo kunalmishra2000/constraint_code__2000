@@ -1,0 +1,22 @@
+////Q :Write a constraaint to generate the pattern 1122334455
+
+
+class packet;
+  rand int a[10];
+  
+  constraint x{ foreach(a[i])
+    a[i]== (i+2)/2;
+              }
+  
+  function void post_randomize();
+    $display("a=%0p", a);
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+    pac.randomize();
+  end
+endmodule 
