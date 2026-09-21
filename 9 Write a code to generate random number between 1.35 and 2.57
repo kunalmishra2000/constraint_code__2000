@@ -1,0 +1,22 @@
+//Q6:Write a code to generate random number between 1.35 and 2.57
+
+
+class packet;
+  rand int a;
+  real b;
+  
+  constraint x{ a inside {[1350:2570]};}
+  
+  function void post_randomize();
+    b= a/1000.0;
+    $display("a=%0f", b);
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+    pac.randomize();
+  end
+endmodule 
