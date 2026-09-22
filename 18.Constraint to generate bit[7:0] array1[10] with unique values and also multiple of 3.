@@ -1,0 +1,32 @@
+// Constraint to generate bit[7:0] array1[10] with unique values and also multiple of 3.
+
+class packet;
+
+  rand bit [7:0] a[10];
+  
+ 
+  
+  constraint x{ foreach(a[i])
+    foreach(a[j])
+      if(i != j)
+        a[i] !=a[j];
+    
+              }
+  constraint xxxx{ foreach(a[i])
+    a[i]%3==0;}
+  
+  function void post_randomize();
+    foreach(a[i])
+      $write("a=%0p ",a[i]);
+    
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+      assert(pac.randomize());
+end
+  
+endmodule 
