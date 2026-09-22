@@ -1,0 +1,33 @@
+////Q11:Write a constraint to genarate FACTORIAL of first 5 even numbers and odd numbers .
+
+class packet;
+  rand int even[5];
+  rand int odd[5];
+  
+  function int fact(int a);
+    if(a==0)
+      return 1;
+    else 
+      return fact(a-1)*a;
+  endfunction
+    
+  constraint for_even{ foreach(even[i])  even[i]== fact((i+1)*2);}
+  
+  constraint for_odd{ foreach(odd[i]) odd[i]== fact((i*2)+1);}
+  
+  function void post_randomize();
+    $display("even_factorial=%0p",even);
+    $display("odd_factorial=%0p",odd);
+
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+   // repeat(10)begin
+      assert(pac.randomize());
+//end
+  end
+endmodule 
