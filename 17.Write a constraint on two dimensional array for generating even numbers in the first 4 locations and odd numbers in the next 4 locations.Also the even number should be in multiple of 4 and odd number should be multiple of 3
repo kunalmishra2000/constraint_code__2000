@@ -15,7 +15,7 @@ class packet;
       a[i][j]%4==0;
                else 
                  
-                 a[i][j]%3==0;
+              a[i]%2 !=0 &&   a[i][j]%3==0;
               }
   
   
