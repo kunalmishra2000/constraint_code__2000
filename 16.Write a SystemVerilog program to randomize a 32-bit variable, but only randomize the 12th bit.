@@ -1,0 +1,26 @@
+// Write a SystemVerilog program to randomize a 32-bit variable, but only randomize the 12th bit.
+
+class packet;
+  rand bit[31:0] a;
+
+  constraint x{ foreach(a[i])
+    if(i==12)
+      a[i] inside {0,1};
+               else 
+                 a[i]==0;
+              }
+  function void post_randomize();
+   
+    $display("a=%b",a);
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+   repeat(10)begin
+      assert(pac.randomize());
+end
+  end
+endmodule 
