@@ -1,0 +1,33 @@
+////Q18:Write a constraint to generate prime numbers between the range of 1 to 100.
+
+class packet;
+
+rand int a;
+  constraint x{ a inside {[1:100]};}
+  
+  function int prime(int a);
+    if(a<2)begin
+      return 0;
+    end
+    for(int i=2; i<a; i++)begin
+      if(a%i==0)
+        return 0;
+    end
+    return a;
+  endfunction
+  
+  function void post_randomize();
+    $display("a=%0p ",prime(a));
+    
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+    repeat(20)
+      assert(pac.randomize());
+end
+  
+endmodule 
