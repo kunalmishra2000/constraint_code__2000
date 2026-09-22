@@ -1,0 +1,27 @@
+////Q10:Write a for a 32 bit rand variable such that it should have 12 number of 1's non consecutively.
+
+class packet;
+  rand bit [31:0] a;
+  
+  constraint x{ foreach(a[i])
+    if(i>0 && a[i]==1)
+      a[i] !=a[i-1];}
+  
+  constraint xxx{ $countbits(a,1)==12;}
+    
+  
+  
+  function void post_randomize();
+    $display("a=%b", a);
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+    repeat(10)begin
+      assert(pac.randomize());
+  end
+  end
+endmodule 
