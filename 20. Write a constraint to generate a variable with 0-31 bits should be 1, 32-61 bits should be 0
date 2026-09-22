@@ -1,0 +1,26 @@
+//Q19:Write a constraint to generate a variable with 0-31 bits should be 1, 32-61 bits should be 0.
+
+class packet;
+
+  rand bit [63:0] a;
+  
+  constraint x{ foreach(a[i]) 
+    if(i<31)
+      a[i]==1;
+               else 
+                 a[i]==0;
+              }
+  function void post_randomize();
+    $display("a=%b ",a);
+    
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+      assert(pac.randomize());
+end
+  
+endmodule 
