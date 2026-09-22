@@ -1,0 +1,29 @@
+//Write a constraint such that even locations contains odd numbers and odd locations contains even numbers.
+
+class packet;
+  rand int a[20];
+  
+  constraint xx{ foreach(a[i]) a[i] inside {[1:500]};}
+  
+  //simple way 
+  constraint x{ foreach(a[i])
+    if(i%2==0)
+      a[i]%2==1;
+               else 
+                a[i]%2==0;
+              }
+  function void post_randomize();
+   
+    $display("a=%0p",a);
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+   // repeat(10)begin
+      assert(pac.randomize());
+//end
+  end
+endmodule 
