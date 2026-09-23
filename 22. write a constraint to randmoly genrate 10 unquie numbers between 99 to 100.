@@ -1,0 +1,28 @@
+// write a constraint to randmoly genrate 10 unquie numbers between 99 to 100.
+
+class packet;
+
+  rand int a[10];
+  
+  real b[10];
+  constraint x{ foreach(a[i]) a[i] inside {[990:1000]};}
+ 
+  constraint xx{ unique{a};}
+
+  
+  function void post_randomize();
+    foreach(a[i])begin
+      b[i]= a[i]/10.0;
+    end
+    $display("b=%0p", b);
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+      assert(pac.randomize());
+end
+  
+endmodule 
