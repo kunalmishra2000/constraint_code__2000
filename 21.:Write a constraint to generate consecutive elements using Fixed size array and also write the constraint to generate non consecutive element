@@ -1,0 +1,38 @@
+/*Q20:Write a constraint to generate consecutive elements using Fixed
+size array and also write the constraint to generate non consecutive
+elements*/
+class packet;
+
+  rand int cons[10];
+  rand int non_cons[10];
+  
+  constraint x6{ foreach(non_cons[i]) non_cons[i] inside {[1:300]};}
+  
+  constraint x{ foreach(cons[i])
+    if(i>0)
+      cons[i]==i; //consecutive
+              }
+  
+  ////non_consecutive
+  constraint xd{ foreach(non_cons[i])
+    foreach(non_cons[j])
+      if(i !=j)
+        non_cons[i] != non_cons[j]; 
+              }
+  
+  function void post_randomize();
+    $display("cons=%0p ",cons);
+    $display("cons=%0p ",non_cons);
+
+    
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+      assert(pac.randomize());
+end
+  
+endmodule 
