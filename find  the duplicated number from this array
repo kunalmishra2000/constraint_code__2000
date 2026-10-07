@@ -34,4 +34,41 @@ initial begin
   end
   end
   endmodule
+
+//using array manipulation
+
+class packet;
+  int data[8]='{5,1,66,99,1,5,90,66};
+  int cnt[8];
+
+
+  
+  function void post_randomize();
+
+    foreach (data[i]) begin
+      cnt[i] = data.sum() with (real'(item == data[i]));
+
+      if (cnt[i] == 1)
+        $display("Unique data = %0d", data[i]);
+      else if (cnt[i] > 1)
+        $display("Duplicate data = %0d, count = %0d", data[i], cnt[i]);
+    end
+
+  endfunction
+
+endclass
+
+
+module tab;
+
+  packet pac = new();
+
+  initial begin
+    if (pac.randomize())
+      $display("Randomization successful");
+    else
+      $display("Randomization failed");
+  end
+
+endmodule
   
