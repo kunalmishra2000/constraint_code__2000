@@ -1,0 +1,39 @@
+// find  the duplicated number from this array  to count how many duplicate number 
+class packet;
+  
+  
+  int a[6]='{17,1,17,8,1,5};
+  int b[6];
+  int count=0;
+  constraint xx{ a.size==6;}
+
+        
+    
+    function void post_randomize();
+      count=0;
+      foreach(a[i])begin
+        foreach(a[j])begin
+        if(i !=j)
+          if(a[i] == a[j])
+         //   b[i]=a[i]; // store duplicate number
+          count++;
+        end
+      end
+      
+      $display("a=%0p b=%0p counter_of_duplicate=%0d", a,b,count);
+               endfunction
+               
+               endclass
+               
+               module tab;
+                 packet pac[];
+initial begin
+  pac=new[5];
+  
+  foreach(pac[i])begin
+    pac[i]=new();
+    pac[i].randomize();
+  end
+  end
+  endmodule
+  
