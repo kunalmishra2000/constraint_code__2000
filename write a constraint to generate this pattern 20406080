@@ -1,0 +1,31 @@
+//write a constraint to generate this pattern 20406080
+class packet;
+  rand int a[8];
+  
+  constraint x{ foreach(a[i]){
+    if(i%2==0)
+      a[i]==((i*2)+4)/2;
+    else
+      a[i]==0;
+  }
+    
+              }
+    
+    function void post_randomize();
+               $display("a=%0p", a);
+               endfunction
+               
+               endclass
+               
+               module tab;
+                 packet pac[];
+initial begin
+  pac=new[5];
+  
+  foreach(pac[i])begin
+    pac[i]=new();
+    pac[i].randomize();
+  end
+  end
+  endmodule
+  
