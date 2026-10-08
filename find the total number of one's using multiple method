@@ -1,0 +1,42 @@
+// find the total number of one's
+
+class packet;
+  rand bit[11:0] a;
+   int count;
+  //method1
+  //function void post_randomize();
+//    // $display( "[BEFORE]a=%b a=%0d count=%0d",a,a,count);
+//     count=0;
+//     while(a)begin
+//       $display( "[1] a=%b a=%0d count=%0d",a,a,count);
+
+//       count = count+a%2;
+//       $display( "[2] a=%b a=%0d count=%0d",a,a,count);
+
+//       a= a/2;
+//       $display( "[3] a=%b a=%0d count=%0d",a,a,count);
+
+//     end
+//    // $display( "[AFTER] a=%b a=%0d count=%0d",a,a,count);
+//   endfunction
+    
+  //other method2
+function void post_randomize();
+  count =0;
+  for(int i=0; i<31; i++)begin
+    if(a[i]==1)
+      count++;
+  end
+  $display("a=%b count=%0d", a,count);
+  
+ 
+  endfunction
+  
+endclass
+
+module tab;
+  packet pac=new();
+  initial begin
+    repeat(10) pac.randomize();
+  end
+endmodule
